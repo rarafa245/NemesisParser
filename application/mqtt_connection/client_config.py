@@ -1,6 +1,6 @@
 mqtt_client_config = {
-    "BROKER" : "localhost",
-    "CLIENT_NAME": "NemesisParser",
+    "HOST" : "localhost",
     "PORT": 1883,
+    "CLIENT_NAME": "NemesisParser",
     "KEEPALIVE": 60
 }

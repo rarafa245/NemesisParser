@@ -16,8 +16,9 @@ class Mqtt_Client:
         self.broker_ip = broker_ip
         self.client_id = client_id
         self.port = port
+        self.keepalive = keepalive
         self.mqtt_client = self.start_connection(self.broker_ip, self.client_id, 
-                                            self.port, keepalive)
+                                                self.port, self.keepalive)
 
 
     def start_connection(self, broker_ip: str, client_name: str, port: int, keepalive: int):
