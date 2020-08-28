@@ -1,3 +1,5 @@
+from application.controller import parsing_message
+
 def on_connect(client, userdata, flags, rc):
     ''' Callback - Client Connect:
         - Print information about the sucessfull of the process.
@@ -24,6 +26,7 @@ def on_disconnect(client, userdata, rc):
     ''' Callback - Client Disconnect:
         - Print information about the sucessfull of the process
     '''
+    
     if rc == 0:
         print("Client Sucessfuly Disconnected")
     else:
@@ -31,5 +34,8 @@ def on_disconnect(client, userdata, rc):
 
 
 def on_message(client, userdata, message):
-    print(message.payload)
-    print(type(message.payload))
+    ''' Callback - Receave Message:
+        - Redirect Message to parseing process
+    '''
+
+    parsing_message(message.payload)
