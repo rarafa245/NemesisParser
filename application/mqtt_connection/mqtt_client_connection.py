@@ -51,4 +51,12 @@ class Mqtt_Client:
             return False
         
         return True
+    
+    def get_mqtt_client(self):
+        ''' Getting mqtt client connection
+            :parram - None
+            :return - mqtt_client
+        '''
+
+        return self.mqtt_client
         
