@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 import time
-from .client_config import on_connect
+from .client_callbacks import on_connect, on_subscribe, on_disconnect, on_message
 
 
 class Mqtt_Client:
@@ -30,10 +30,14 @@ class Mqtt_Client:
         '''
         
         mqtt_client = mqtt.Client(client_name)
-        mqtt_client.on_connect = on_connect
+        mqtt_client.on_connect = on_connect                                 # Defining callback connect to MQTT Broker
+        mqtt_client.on_subscribe = on_subscribe                             # Defining callback Subscribe Topic
+        mqtt_client.on_disconnect = on_disconnect                           # Defining callback Disconnect to MQTT Broker
+        mqtt_client.on_message = on_message                                 # Defining callback Receving Message from Subscribe
 
         mqtt_client.connect(host=broker_ip, port=port, keepalive=keepalive)
-        mqtt_client.loop_start()
+        mqtt_client.loop_start()                                            # Starting Event Loop for callbacks
+        
         return mqtt_client
 
 

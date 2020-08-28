@@ -4,7 +4,3 @@ mqtt_client_config = {
     "PORT": 1883,
     "KEEPALIVE": 60
 }
-
-
-def on_connect(client, userdata, flags, rc):
-    print(client)
