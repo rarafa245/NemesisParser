@@ -1,4 +1,4 @@
-from application.controller import parsing_message
+from application.controller import on_received_message
 
 def on_connect(client, userdata, flags, rc):
     ''' Callback - Client Connect:
@@ -38,4 +38,4 @@ def on_message(client, userdata, message):
         - Redirect Message to parseing process
     '''
 
-    parsing_message(message.payload)
+    on_received_message(message.payload)

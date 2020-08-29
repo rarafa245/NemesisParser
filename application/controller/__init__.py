@@ -1,1 +1,1 @@
-from .parsing import parsing_message
+from .parser_handler import on_received_message
