@@ -1,4 +1,4 @@
-from application.controller.parsing import consistency_checker
+from application.controller.parser_processes.parsing import consistency_checker
 import pytest
 
 @pytest.mark.parametrize('header, footer, result',

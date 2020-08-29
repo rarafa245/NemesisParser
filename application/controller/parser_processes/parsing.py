@@ -46,9 +46,3 @@ def consistency_checker(header: str, footer: str) -> bool:
         return False
 
     return True
-
-
-def parsering_message_payload(payload: str):
-    pass
-
-

@@ -1,4 +1,4 @@
-from .parsing import parsing_message
+from .parser_processes import parsing_message
 
 def on_received_message(message: str):
 
