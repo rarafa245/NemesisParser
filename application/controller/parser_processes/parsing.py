@@ -1,6 +1,10 @@
 from typing import Dict
 
 def parsing_message(message: str) -> Dict:
+    ''' Recive a message and parser it
+        :parram - message: bytearray with the received message
+        :return - dictionary with the parsed message
+    '''
 
     message_header = message[:4]
     message_footer = message[-4:]
