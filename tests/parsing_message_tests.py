@@ -1,4 +1,4 @@
-from application.controller.parser_handler import on_received_message
+from application.controller.parser_processes.parsing import parsing_message
 import pytest
 
 @pytest.mark.parametrize('message, result',
@@ -74,4 +74,4 @@ import pytest
     ),
 ])
 def teste_parsing_message(message, result):
-    assert on_received_message(message) == result
+    assert parsing_message(message) == result
