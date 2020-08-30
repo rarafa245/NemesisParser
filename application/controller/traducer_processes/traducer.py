@@ -1,4 +1,5 @@
-from typing import Dict
+from typing import Dict, Tuple
+from collections import namedtuple
 import datetime
 
 
@@ -23,10 +24,13 @@ def traducing_message(message: Dict) -> Dict:
 
     # Passing distance m - km
     distance_km = distance/1000
-    
 
-def check_composer():
-    pass
+    # Getting Composer Infos
+    composer_infos = check_composer(composer)
+
+    print(composer_infos)
+    print(composer_infos.fix)
+
 
 
 def convert_timestamp_to_date(timestamp: int) -> Dict:
@@ -45,6 +49,33 @@ def convert_timestamp_to_date(timestamp: int) -> Dict:
     }
 
     return date_values
+
+
+def check_composer(composer: int) -> Tuple:
+    ''' Checking all the bits from composer and returning info
+        :parram - composer: integer with especific inforations
+        :return - named tuple with informations in the composer
+    '''
+
+    # offset to go to most significant byte
+    offset = 10
+    Composer_Infos = namedtuple('Composer_Infos', 'fix live ignition lat_negative lon_negative')
+
+    # Testing bit 1 - 5 in composer
+    fix = check_bit(composer, offset + 5)
+    live = check_bit(composer, offset + 4)
+    ignition = check_bit(composer, offset + 3)
+    lat_negative = check_bit(composer, offset + 2)
+    lon_negative = check_bit(composer, offset + 1)
+
+    return Composer_Infos(
+        fix = fix,
+        live = live,
+        ignition = ignition,
+        lat_negative = lat_negative,
+        lon_negative = lon_negative
+    )
+
 
 
 def check_bit(byte_info: int, position: int) -> bool:
