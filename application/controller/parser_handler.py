@@ -6,7 +6,6 @@ def on_received_message(message: str):
 
     # Parsing
     parsed_messsage = parsing_message(message)
-    print(parsed_messsage)
 
     # Traducing
     if parsed_messsage["TYPE"] == b'02':

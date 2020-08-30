@@ -4,33 +4,54 @@ import datetime
 
 
 def traducing_message(message: Dict) -> Dict:
+    ''' Processing some funtionalitys to traduce the message
+        :parram: message - a dictionary with all the parsed informations
+        :return: traduced_data - a dictionary with traduced informations
+    '''
     
     # Getting relevant initial informations
     message_type = 'loc'
+    GPS_precision = 1000000
+    distance_convert_km = 1000
     payload = message['PAYLOAD']
     
     # Converting payload elements in int
     timestamp = int(payload["TIMESTAMP"], 16)
     angle = int(payload["DIRECTION"], 16)         
-    distance = int(payload["DISTANCE"], 16)
+    distance = int(payload["DISTANCE"], 16) / distance_convert_km
     time_on = int(payload["TIME_ON"], 16)         
     speed = int(payload["SPEED"], 16)             
-    raw_latitude = int(payload["LATITUDE"], 16)       # form
-    raw_longitude = int(payload["LONGITUDE"], 16)     # form
+    latitude = int(payload["LATITUDE"], 16) / (GPS_precision)
+    longitude = int(payload["LONGITUDE"], 16) / (GPS_precision)
     composer = int(payload["COMPOSER"], 16)
 
     # Get data values from timestamp
     date_values = convert_timestamp_to_date(timestamp)
 
-    # Passing distance m - km
-    distance_km = distance/1000
-
-    # Getting Composer Infos
+    # Getting Composer Infos and changing Lat, Long signal
     composer_infos = check_composer(composer)
+    if composer_infos.lat_negative: latitude = (-1) * latitude
+    if composer_infos.lon_negative: longitude = (-1) * longitude
 
-    print(composer_infos)
-    print(composer_infos.fix)
+    # Defining informations of fix, live gps and ignition
+    fix = composer_infos.fix
+    live = composer_infos.live
+    ignition = composer_infos.ignition
 
+    traduced_data = {
+        "FIX": fix,
+        "LIVE": live,
+        "IGNITION": ignition,
+        "DATE_INFOS": date_values,
+        "ANGLE": angle,
+        "DISTANCE": distance,
+        "TIME_ON": time_on,
+        "SPEED": speed,
+        "LATITUDE": latitude,
+        "LONGITUDE": longitude,
+    }
+
+    return traduced_data
 
 
 def convert_timestamp_to_date(timestamp: int) -> Dict:
