@@ -1,4 +1,5 @@
 from typing import Dict
+from application.db import redis_client
 
 def parser_action(client, message: Dict): 
     
