@@ -51,7 +51,7 @@ class Mqtt_Client:
         try: 
             self.mqtt_client.loop_stop()
             self.mqtt_client.disconnect()
-
+            
         except:
             return False
         
