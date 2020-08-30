@@ -1,1 +1,1 @@
-from .redis import redis_client
+from .redis_inserts import redis_insert_localization

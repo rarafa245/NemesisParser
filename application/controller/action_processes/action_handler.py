@@ -1,6 +1,6 @@
 import json
 from typing import Dict
-from application.db import redis_client
+from application.db import redis_insert_localization
 
 def parser_action(client, message: Dict): 
     
@@ -26,8 +26,9 @@ def parser_action(client, message: Dict):
         copy_message["TYPE"] = "LOC"
         json_message = json.dumps(copy_message)
 
-        redis_client.set('message', json_message, ex=60)
-    
+        insert_data = redis_insert_localization(message["DEVICE"], json_message, 60)
+        client.publish(topic='/DB', payload=json_message)
+        
     else:
         #Response to Nowhere
         print('erro all message')
