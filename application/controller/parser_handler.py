@@ -1,5 +1,5 @@
 from .parser_processes import parsing_message
-from .traducer_precesses import traducing_message
+from .traducer_processes import traducing_message
 
 
 def on_received_message(message: str):

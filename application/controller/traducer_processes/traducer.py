@@ -16,12 +16,21 @@ def traducing_message(message: Dict) -> Dict:
     raw_latitude = int(payload["LATITUDE"], 16)       # form
     raw_longitude = int(payload["LONGITUDE"], 16)     # form
 
-    composer = payload["COMPOSER"]
+    composer = int(payload["COMPOSER"], 16)
 
 
 def check_composer():
     pass
 
 
-def check_bit(byte, position):
-    pass
+def check_bit(byte_info: int, position: int) -> bool:
+    ''' Using bitmask, checking the value (0/1) of the bit
+        :parram - byte_info: byte information converting in int
+                - position: position of the check (start with 0)
+        :return - boolean False/True (0/1)
+    '''
+    
+    if byte_info & (1 << position):
+        return True
+
+    return False
