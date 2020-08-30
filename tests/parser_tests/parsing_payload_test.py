@@ -3,10 +3,10 @@ import pytest
 
 @pytest.mark.parametrize('message, result',
 [
-    (bytearray('5EFCF950156F017D784000008CA0F8003C013026A1029E72BD', "utf8"), 
+    (bytearray('5EFCF9500156017D784000008CA0F8003C013026A1029E72BD', "utf8"), 
         {
             "TIMESTAMP": b'5EFCF950',
-            "DIRECTION": b'156F',
+            "DIRECTION": b'0156',
             "DISTANCE": b'017D7840',
             "TIME_ON": b'00008CA0',
             "COMPOSER": b'F800',

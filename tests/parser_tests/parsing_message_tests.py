@@ -4,14 +4,14 @@ import pytest
 @pytest.mark.parametrize('message, result',
 [
     # Testing normal message location
-    (bytearray('50F70A3F73025EFCF950156F017D784000008CA0F8003C013026A1029E72BD73C4', "utf8"), 
+    (bytearray('50F70A3F73025EFCF9500156017D784000008CA0F8003C013026A1029E72BD73C4', "utf8"), 
         {
             "HEADER": b'50F7',
             "DEVICE": b'0A3F73',
             "TYPE": b'02',
             "PAYLOAD": {
                         "TIMESTAMP": b'5EFCF950',
-                        "DIRECTION": b'156F',
+                        "DIRECTION": b'0156',
                         "DISTANCE": b'017D7840',
                         "TIME_ON": b'00008CA0',
                         "COMPOSER": b'F800',
