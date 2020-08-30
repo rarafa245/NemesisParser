@@ -25,6 +25,7 @@ def parser_action(client, message: Dict):
 
         copy_message["TYPE"] = "LOC"
         json_message = json.dumps(copy_message)
+        print(json_message)
 
         insert_data = redis_insert_localization(message["DEVICE"], json_message, 60)
         client.publish(topic='/DB', payload=json_message)

@@ -37,14 +37,14 @@ def traducing_message(message: Dict) -> Dict:
 
     # Defining informations of fix, live gps and ignition
     fix = composer_infos.fix
-    live = composer_infos.live
+    hist = composer_infos.hist
     ignition = composer_infos.ignition
 
     traduced_data = {
         "DEVICE": device,
         "TYPE": message_type,
         "FIX": fix,
-        "LIVE": live,
+        "HIST": hist,
         "IGNITION": ignition,
         "DATE_INFOS": date_values,
         "ANGLE": angle,
@@ -84,18 +84,18 @@ def check_composer(composer: int) -> Tuple:
 
     # offset to go to most significant byte
     offset = 10
-    Composer_Infos = namedtuple('Composer_Infos', 'fix live ignition lat_negative lon_negative')
+    Composer_Infos = namedtuple('Composer_Infos', 'fix hist ignition lat_negative lon_negative')
 
     # Testing bit 1 - 5 in composer
     fix = check_bit(composer, offset + 5)
-    live = check_bit(composer, offset + 4)
+    hist = check_bit(composer, offset + 4)
     ignition = check_bit(composer, offset + 3)
     lat_negative = check_bit(composer, offset + 2)
     lon_negative = check_bit(composer, offset + 1)
 
     return Composer_Infos(
         fix = fix,
-        live = live,
+        hist = hist,
         ignition = ignition,
         lat_negative = lat_negative,
         lon_negative = lon_negative
