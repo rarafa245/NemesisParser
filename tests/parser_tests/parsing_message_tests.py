@@ -54,6 +54,17 @@ import pytest
         }
     ),
 
+    # testing normal message ping without payload
+    (bytearray('50F70A3F730173C4', "utf8"), 
+        {
+            "HEADER": b'50F7',
+            "DEVICE": b'0A3F73',
+            "TYPE": b'01',
+            "PAYLOAD": b'',
+            "FOOTER": b'73C4'
+        }
+    ),
+
     # Testing message with header error
     (bytearray('55F70A3F73025EFCF950156F017D784000008CA0F8003C013026A1029E72BD73C4', "utf8"), 
         {
