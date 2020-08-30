@@ -25,9 +25,13 @@ def parser_action(client, message: Dict):
 
         copy_message["TYPE"] = "LOC"
         json_message = json.dumps(copy_message)
-        print(json_message)
+        ttl = 180
 
-        insert_data = redis_insert_localization(message["DEVICE"], json_message, 60)
+        if message['FIX'] and not message['HIST']:
+            # If GPS has FIX and data not historic
+            
+            insert_data = redis_insert_localization(message["DEVICE"], json_message, ttl)
+        
         client.publish(topic='/DB', payload=json_message)
         
     else:
