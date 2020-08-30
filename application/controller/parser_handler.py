@@ -1,8 +1,9 @@
 from .parser_processes import parsing_message
 from .traducer_processes import traducing_message
+from .action_processes import parser_action
 
 
-def on_received_message(message: str):
+def on_received_message(client, message: str):
 
     parsed_messsage = {}
     traduced_message = {}
@@ -16,9 +17,8 @@ def on_received_message(message: str):
     else:
         traduced_message = parsed_messsage
     
-    print(traduced_message)
     # Acting
-
+    parser_action(client, traduced_message)
 
     return parsed_messsage
     

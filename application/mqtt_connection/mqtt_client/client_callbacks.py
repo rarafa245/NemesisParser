@@ -38,4 +38,4 @@ def on_message(client, userdata, message):
         - Redirect Message to parseing process
     '''
 
-    on_received_message(message.payload)
+    on_received_message(client, message.payload)
