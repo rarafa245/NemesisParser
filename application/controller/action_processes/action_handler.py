@@ -1,9 +1,12 @@
+import json
 from typing import Dict
 from application.db import redis_client
 
 def parser_action(client, message: Dict): 
     
-    print(message)
+    #print(message)
+    copy_message = message
+
     if message['TYPE'] == b'01':
         # Response to Gateway and DB topic
 
@@ -17,9 +20,13 @@ def parser_action(client, message: Dict):
         client.publish(topic='/DB', payload=response)
     
     elif message['TYPE'] == b'02':
-        # Response to Redis and DB
+        # Converting message to Json and storing it in Redis
+        # and send it to Gateway to DBexport
 
-        print('local message')
+        copy_message["TYPE"] = "LOC"
+        json_message = json.dumps(copy_message)
+
+        redis_client.set('message', json_message, ex=60)
     
     else:
         #Response to Nowhere
