@@ -10,10 +10,12 @@ def traducing_message(message: Dict) -> Dict:
     '''
     
     # Getting relevant initial informations
-    message_type = 'loc'
     GPS_precision = 1000000
     distance_convert_km = 1000
-    payload = message['PAYLOAD']
+    payload = message["PAYLOAD"]
+    message_type = message["TYPE"]
+    device = message["DEVICE"].decode('utf8')
+
     
     # Converting payload elements in int
     timestamp = int(payload["TIMESTAMP"], 16)
@@ -39,6 +41,8 @@ def traducing_message(message: Dict) -> Dict:
     ignition = composer_infos.ignition
 
     traduced_data = {
+        "DEVICE": device,
+        "TYPE": message_type,
         "FIX": fix,
         "LIVE": live,
         "IGNITION": ignition,
