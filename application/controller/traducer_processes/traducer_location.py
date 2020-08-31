@@ -3,7 +3,7 @@ from collections import namedtuple
 import datetime
 
 
-def traducing_message(message: Dict) -> Dict:
+def traducing_message_location(message: Dict) -> Dict:
     ''' Processing some funtionalitys to traduce the message
         :parram: message - a dictionary with all the parsed informations
         :return: traduced_data - a dictionary with traduced informations
