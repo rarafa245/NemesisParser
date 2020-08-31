@@ -2,11 +2,15 @@ import json
 from typing import Dict
 from application.db import redis_insert_localization
 
-def parser_action(client, message: Dict): 
+def parser_action(client, message: Dict) -> bool:
+    ''' Filtering the datas and sending to the correct locals
+        :parram - client: MQTT Client Connection
+                - message: dictionary with the traduced message
+        :return boolean with success/failure of all processes
+    '''
     
 
     if message['TYPE'] == b'01':
-        print(message)
         # Response to Gateway and DB topic
 
         response = message["HEADER"] \
@@ -26,6 +30,8 @@ def parser_action(client, message: Dict):
         client.publish(topic='/ping', payload=response)
         client.publish(topic='/DB', payload=json_message)
 
+        return True
+
     
     elif message['TYPE'] == b'02':
         # Converting message to Json and storing it in Redis
@@ -41,8 +47,7 @@ def parser_action(client, message: Dict):
             insert_data = redis_insert_localization(message["DEVICE"], json_message, ttl)
         
         client.publish(topic='/DB', payload=json_message)
-        
 
-    else:
-        #Response to Nowhere
-        print('erro all message')
+        return True
+
+    return False

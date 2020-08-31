@@ -4,7 +4,13 @@ from .action_processes import parser_action
 
 
 
-def on_received_message(client, message: str):
+def on_received_message(client, message: bytearray) -> bool:
+    ''' Callback function to process the received message:
+            Parsing, Traducing, Acting
+        :parram - client: MQTT Client Connection
+                - message: raw message in bytearray
+        :return boolean with success/failure of all processes
+    '''
 
     parsed_messsage = {}
     traduced_message = {}
@@ -19,6 +25,6 @@ def on_received_message(client, message: str):
         traduced_message = traducing_message_ping(parsed_messsage)
     
     # Acting
-    parser_action(client, traduced_message)
+    send_response = parser_action(client, traduced_message)
 
-    return
+    return send_response
