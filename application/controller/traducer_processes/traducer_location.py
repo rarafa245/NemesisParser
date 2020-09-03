@@ -12,6 +12,7 @@ def traducing_message_location(message: Dict) -> Dict:
     # Getting relevant initial informations
     GPS_precision = 1000000
     distance_convert_km = 1000
+    const_angle = 100
     payload = message["PAYLOAD"]
     message_type = message["TYPE"]
     device = message["DEVICE"].decode('utf8')
@@ -19,7 +20,7 @@ def traducing_message_location(message: Dict) -> Dict:
     
     # Converting payload elements in int
     timestamp = int(payload["TIMESTAMP"], 16)
-    angle = int(payload["DIRECTION"], 16)         
+    angle = int(payload["DIRECTION"], 16)   / const_angle      
     distance = int(payload["DISTANCE"], 16) / distance_convert_km
     time_on = int(payload["TIME_ON"], 16)         
     speed = int(payload["SPEED"], 16)             
